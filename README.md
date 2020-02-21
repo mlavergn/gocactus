@@ -1,6 +1,6 @@
 [![Build Status](https://github.com/mlavergn/gocactus/workflows/CI/badge.svg?branch=master)](https://github.com/mlavergn/gocactus/actions)
 [![Go Report](https://goreportcard.com/badge/github.com/mlavergn/gocactus)](https://goreportcard.com/report/github.com/mlavergn/gocactus)
-[![GoDoc](https://godoc.org/github.com/mlavergn/gocactus/src/rx?status.svg)](https://godoc.org/github.com/mlavergn/gocactus/src/rx)
+[![GoDoc](https://godoc.org/github.com/mlavergn/gocactus?status.svg)](https://godoc.org/github.com/mlavergn/gocactus)
 
 # Go Cactus
 

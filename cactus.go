@@ -4,11 +4,13 @@ import (
 	"bytes"
 	"crypto/tls"
 	"crypto/x509"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"net/url"
+	"regexp"
 	"time"
 )
 
@@ -17,14 +19,14 @@ const Version = "0.1.0"
 
 // Cactus export
 type Cactus struct {
-	Client  *http.Client
-	URLRoot string
+	httpClient *http.Client
+	urlRoot    string
 }
 
 // NewCactus export
 func NewCactus() *Cactus {
 	id := &Cactus{
-		URLRoot: "https://billing.cactusvpn.com",
+		urlRoot: "https://billing.cactusvpn.com",
 	}
 
 	rootCAs, _ := x509.SystemCertPool()
@@ -50,7 +52,7 @@ func NewCactus() *Cactus {
 		}).DialContext,
 	}
 
-	id.Client = &http.Client{
+	id.httpClient = &http.Client{
 		Transport: httpTransport,
 	}
 
@@ -61,7 +63,7 @@ func NewCactus() *Cactus {
 func (id *Cactus) Token() string {
 	log.Println("Cactus.Token")
 
-	req, rerr := http.NewRequest("GET", id.URLRoot+"/clientarea.php", nil)
+	req, rerr := http.NewRequest("GET", id.urlRoot+"/clientarea.php", nil)
 	if rerr != nil {
 		log.Println("Cactus.Token failed request", rerr)
 		return ""
@@ -69,7 +71,7 @@ func (id *Cactus) Token() string {
 
 	req.Header.Add("Connection", "close")
 
-	resp, derr := id.Client.Do(req)
+	resp, derr := id.httpClient.Do(req)
 	if derr != nil {
 		log.Println("Cactus.Token failed send", derr)
 		return ""
@@ -81,10 +83,21 @@ func (id *Cactus) Token() string {
 		log.Println("Cactus.Token failed read", derr)
 		return ""
 	}
+	html := string(data)
 
-	// TODO
-	// .*csrfToken = '([^']*)'.*
-	return string(data)
+	// find the CSRF token
+	re, err := regexp.Compile(".*csrfToken = '([^']*)'.*")
+	if err != nil {
+		fmt.Println("failed to compile", err)
+		return ""
+	}
+	match := re.FindStringSubmatch(html)
+	if len(match) < 2 {
+		fmt.Println("failed to match")
+		return ""
+	}
+
+	return match[1]
 }
 
 // Login export
@@ -99,7 +112,7 @@ func (id *Cactus) Login(email string, password string) bool {
 	params.Set("token", token)
 	body := bytes.NewBufferString(params.Encode())
 
-	req, rerr := http.NewRequest("POST", id.URLRoot+"/dologin.php", body)
+	req, rerr := http.NewRequest("POST", id.urlRoot+"/dologin.php", body)
 	if rerr != nil {
 		log.Println("Cactus.Login failed request", rerr)
 		return false
@@ -107,7 +120,7 @@ func (id *Cactus) Login(email string, password string) bool {
 
 	req.Header.Add("Connection", "close")
 
-	resp, derr := id.Client.Do(req)
+	resp, derr := id.httpClient.Do(req)
 	if derr != nil {
 		log.Println("Cactus.Login failed send", derr)
 		return false
@@ -125,16 +138,16 @@ func (id *Cactus) Login(email string, password string) bool {
 func (id *Cactus) ValidateIP() bool {
 	log.Println("Cactus.ValidateIP")
 
-	req, rerr := http.NewRequest("GET", id.URLRoot+"/clientarea.php", nil)
+	req, rerr := http.NewRequest("GET", id.urlRoot+"/clientarea.php", nil)
 	if rerr != nil {
 		log.Println("Cactus.ValidateIP failed request", rerr)
 		return false
 	}
 
-	req.Header.Add("Referrer", id.URLRoot+"/settings.php")
+	req.Header.Add("Referrer", id.urlRoot+"/settings.php")
 	req.Header.Add("Connection", "close")
 
-	resp, derr := id.Client.Do(req)
+	resp, derr := id.httpClient.Do(req)
 	if derr != nil {
 		log.Println("Cactus.ValidateIP failed send", derr)
 		return false
@@ -148,6 +161,7 @@ func (id *Cactus) ValidateIP() bool {
 	}
 
 	// TODO
+	// can use use status code or does the page have to be parsed
 	if len(data) == 0 {
 		return false
 	}
@@ -159,7 +173,7 @@ func (id *Cactus) ValidateIP() bool {
 func (id *Cactus) GetDNS() string {
 	log.Println("Cactus.GetDNS")
 
-	req, rerr := http.NewRequest("GET", id.URLRoot+"/dns-servers.php", nil)
+	req, rerr := http.NewRequest("GET", id.urlRoot+"/dns-servers.php", nil)
 	if rerr != nil {
 		log.Println("Cactus.GetDNS failed request", rerr)
 		return ""
@@ -167,7 +181,7 @@ func (id *Cactus) GetDNS() string {
 
 	req.Header.Add("Connection", "close")
 
-	resp, derr := id.Client.Do(req)
+	resp, derr := id.httpClient.Do(req)
 	if derr != nil {
 		log.Println("Cactus.GetDNS failed send", derr)
 		return ""
@@ -179,8 +193,22 @@ func (id *Cactus) GetDNS() string {
 		log.Println("Cactus.GetDNS failed read", derr)
 		return ""
 	}
+	html := string(data)
+	return id.parseDNS(html)
+}
 
-	// TODO
-	// .*id="dns[1]" value="([^"]+)".*
-	return string(data)
+func (id *Cactus) parseDNS(html string) string {
+	// find the DNS entry
+	re, err := regexp.Compile(".*id=\"dns[1]\" value=\"([^\"]+)\".*")
+	if err != nil {
+		fmt.Println("failed to compile", err)
+		return ""
+	}
+	match := re.FindStringSubmatch(html)
+	if len(match) < 2 {
+		fmt.Println("failed to match")
+		return ""
+	}
+
+	return match[1]
 }
