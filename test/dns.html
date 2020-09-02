@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DNS Servers - CactusVPN</title>
+
+    <!-- Styling -->
+<link href="/templates/cactusvpnv2/css/all.min.css?v=0e9e00" rel="stylesheet">
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/templates/cactusvpnv2/css/custom.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+    var csrfToken = '10b4e36e41dc1e159d38154a63cc1095ab50a112',
+        markdownGuide = 'Markdown Guide',
+        locale = 'en',
+        saved = 'saved',
+        saving = 'autosaving',
+        whmcsBaseUrl = "",
+        requiredText = 'Required',
+        recaptchaSiteKey = ""; 
+</script>
+<script src="/templates/cactusvpnv2/js/scripts.min.js?v=0e9e00"></script>
+
+<script type="text/javascript" src="includes/jscript/jquery.validate.js"></script>
+<script src="/assets/js/clipboard.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+
+    
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-26601902-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<!-- Dynamic Template Compatibility -->
+<!-- Please update your theme to include or have a comment on the following to negate dynamic inclusion -->
+<link rel="stylesheet" type="text/css" href="/assets/css/fontawesome-all.min.css" />
+
+</head>
+<body>
+    
+
+
+    
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    
+    <div class="container-fluid">
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+
+            <div class="logo">
+                <a href="https://www.cactusvpn.com/">
+                    <svg width="122" height="37">
+                      <image xlink:href="/templates/cactusvpnv2/img/cactusvpn/logo.svg" src="/templates/cactusvpnv2/img/cactusvpn/logo.png" width="122" height="37" />
+                    </svg>
+                </a>
+            </div><!-- .logo -->
+
+        </div>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="visible-xs"><a href="clientarea.php" class="nav-link"><span class="fal fa-tachometer-alt" aria-hidden="true"></span> Dashboard</a></li>
+                <li class="visible-xs"><a href="settings.php" class="nav-link"><span class="fal fa-cog" aria-hidden="true"></span> Settings</a></li>
+                <li class="visible-xs"><a href="clientarea.php?action=products&itemlimit=all" class="nav-link"><span class="fal fa-briefcase" aria-hidden="true"></span> Subscriptions</a></li>
+                <li class="visible-xs"><a href="clientarea.php?action=invoices&itemlimit=all"class="nav-link"><span class="fal fa-usd-circle" aria-hidden="true"></span> Invoices</a></li>
+                <li role="presentation" class="dropdown visible-xs">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                      <span class="fal fa-life-ring" aria-hidden="true"></span> Support <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tutorial.php" class="nav-link"><span class="fal fa-info-circle" aria-hidden="true"></span> How to start</a></li>
+                        <li><a href="submitticket.php?step=2&deptid=1" class="nav-link"><span class="fal fa-comment-plus" aria-hidden="true"></span> Submit a Ticket</a></li>
+                        <li><a href="supporttickets.php?itemlimit=all" class="nav-link"><span class="fal fa-comments" aria-hidden="true"></span> Your Tickets</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown visible-xs">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                      <span class="fal fa-link" aria-hidden="true"></span> Shortcuts <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a href="https://www.cactusvpn.com/pricing/" class="nav-link"><span class="fal fa-shopping-cart" aria-hidden="true"></span> Get a Subscription</a></li>
+                    <li><a href="https://www.cactusvpn.com/support/faq-general/" class="nav-link"><span class="fal fa-question-circle" aria-hidden="true"></span> FAQ</a></li>
+                    <li><a href="https://www.cactusvpn.com/vpn-app-setup-tutorials/" class="nav-link"><span class="fal fa-book-open" aria-hidden="true"></span> Setup Tutorials</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                      <span class="fal fa-user" aria-hidden="true"></span> My Account <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class=""><a href="clientarea.php?action=details"><span class="fal fa-user-cog" aria-hidden="true"></span> Account Details</a></li>
+                        <li class=""><a href="clientarea.php?action=changepw"><span class="fal fa-key" aria-hidden="true"></span> Account Password</a></li>
+                        <li><a href="clientarea.php?action=creditcard" class="nav-link"><span class="fal fa-credit-card" aria-hidden="true"></span> Saved Credit Cards</a></li>
+                        <li ><a href="clientarea.php?action=emails&itemlimit=all"><span class="fal fa-envelope" aria-hidden="true"></span> Emails History</a></li>
+                        <li><a href="index.php?m=testimonials" class="nav-link"><span class="glyphicon fal fa-thumbs-up" aria-hidden="true"></span> Submit a testimonial</a></li>
+                        <li ><a href="affiliates.php?itemlimit=all"><span class="fal fa-wallet" aria-hidden="true"></span> Affiliate Settings</a></li>
+                        <li class="visible-xs"><a href="logout.php"><span class="fal fa-sign-out" aria-hidden="true"></span> Sign out</a></li>
+                    </ul>
+                </li>
+                <li class="hidden-xs"><a href="logout.php"><span class="fal fa-sign-out" aria-hidden="true"></span> Sign out</a></li>
+            </ul>
+            
+        </div>
+    </div>
+</nav>
+    
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-3 col-md-2 sidebar">
+
+            <div class="left-nav navbar-collapse collapse" role="navigation" style="height: 0px;">
+
+                                    
+                                
+            <div class="sidebar-sticky">
+
+                <ul class="nav nav-sidebar main-nav-sidebard">
+                    <li><a href="clientarea.php" class="nav-link"><span class="fal fa-tachometer-alt" aria-hidden="true"></span> Dashboard</a></li>
+                    <li><a href="settings.php" class="nav-link active"><span class="fal fa-cog" aria-hidden="true"></span> Settings</a></li>
+                    <li><a href="clientarea.php?action=products&itemlimit=all" class="nav-link"><span class="fal fa-briefcase" aria-hidden="true"></span> Subscriptions</a></li>
+                    <li><a href="clientarea.php?action=invoices&itemlimit=all" class="nav-link"><span class="fal fa-usd-circle" aria-hidden="true"></span> Invoices</a></li>
+                </ul>
+                
+                <h6 class="sidebar-heading"><span>Support</span></h6>
+                    
+                <ul class="nav nav-sidebar main-nav-sidebard">
+                    <li><a href="tutorial.php" class="nav-link"><span class="fal fa-info-circle" aria-hidden="true"></span> How to start</a></li>
+                    <li><a href="submitticket.php?step=2&deptid=1" class="nav-link"><span class="fal fa-comment-plus" aria-hidden="true"></span> Submit a Ticket</a></li>
+                    <li><a href="supporttickets.php?itemlimit=all" class="nav-link"><span class="fal fa-comments" aria-hidden="true"></span> Support Tickets</a></li>
+                </ul> 
+                
+                <h6 class="sidebar-heading"><span>Shortcuts</span></h6>
+                
+                <ul class="nav nav-sidebar main-nav-sidebard">
+                    <li><a href="https://www.cactusvpn.com/pricing/" class="nav-link"><span class="fal fa-shopping-cart" aria-hidden="true"></span> Get a Subscription</a></li>
+                    <li><a href="https://www.cactusvpn.com/support/faq-general/" class="nav-link"><span class="fal fa-question-circle" aria-hidden="true"></span> FAQ</a></li>
+                    <li><a href="https://www.cactusvpn.com/vpn-app-setup-tutorials/" class="nav-link"><span class="fal fa-book-open" aria-hidden="true"></span> Setup Tutorials</a></li>
+                </ul> 
+                    
+            </div>
+    
+        
+                                    
+            </div><!-- .left-nav -->
+                
+        </div><!-- .sidebar .col-md-2 -->
+
+        <!-- Container for main page display content -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+            <div class=" main main-content">
+
+			
+
+
+<script>
+    var plans = [{"id":541063,"username":"lpqhbvhj","password":"a\/cMDgaCNS0QJkypGUqqA7y\/WkhXVGw+pryI1w==","name":"Smart DNS","packageid":8,"billingcycle":"Monthly"}];
+    var productType;
+    
+        function select_dns1() {
+            $('#dns1').select()
+        }
+    
+        function select_dns2() {
+            $('#dns2').select()
+        }
+    
+        function select_dns3() {
+            $('#dns3').select()
+        }
+
+        var clipboard = new ClipboardJS('.copy');
+        
+    
+</script>
+
+<div class="app-login-credentials">
+    
+    <ol class="breadcrumb">
+        <li><a href="settings.php">Settings</a></li>
+        <li class="active">DNS Servers</li>
+    </ol>
+    
+    <div class="row">
+
+        <div class="col-lg-6 col-md-8 col-md-12">
+
+            
+            <div class="dns-addresses">
+
+                <div class="settings-box">
+                    <div class="settings-box-header">DNS Servers</div>
+
+                    <div class="settings-box-body">
+                        
+                        <p class="title-description">Use any 2 of these 3 addresses to change your device's DNS addresses during the Smart DNS manual setup.</p>
+
+                        
+                        
+
+                        <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Preferred DNS:</th>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="dns1" value="87.117.205.136" type="text" class="form-control" onclick="select_dns1();" readonly>
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-default copy" type="button" data-clipboard-action="copy" data-clipboard-target="#dns1">copy</a>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Alternate DNS:</th>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="dns2" value="88.117.205.136" type="text" class="form-control" onclick="select_dns2();" readonly>
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-default copy" type="button" data-clipboard-action="copy" data-clipboard-target="#dns2">copy</a>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Alternate DNS:</th>
+                                <td>
+                                    <div class="input-group">
+                                        <input id="dns3" value="89.117.205.136" type="text" class="form-control" onclick="select_dns3();" readonly>
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-default copy" type="button" data-clipboard-action="copy" data-clipboard-target="#dns3">copy</a>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                </td>
+                            </tr>
+                        </table> <!-- .table.dns-details -->
+                        </div>
+                        <p class="bottom-description">Don’t know how to change DNS addresses? Check the <a href="https://www.cactusvpn.com/smart-dns-setup-tutorials/">manual setup tutorials</a>.</p>
+
+                        
+                    </div> 
+
+                </div>
+
+            </div><!-- .dns-addresses -->
+            
+                        <div class="dns-addresses">
+
+                <div class="settings-box">
+                    <div class="settings-box-header">DNS Setup Checker</div>
+
+                    <div class="settings-box-body">
+                        
+                        <script type="text/javascript" src="https://ip.cactusvpn.com/index.php"></script>
+                        <script type="text/javascript">
+                            if ( dns_status == 'You are using our DNS servers.') {
+                                var dns_on = '<p class="text-success">The CactusVPN DNS addresses are successfully configured on your device!</p>';
+                                document.write(dns_on);
+                            }
+                            else{
+                                var dns_off = '<p class="text-warning">We didn\'t detect the CactusVPN DNS addresses on your device!</p><p class="bottom-description">You can follow <a href="https://www.cactusvpn.com/smart-dns-setup-tutorials/">our step-by-step tutorials</a> to change your device DNS settings.</p>';
+                                document.write(dns_off);
+                            }
+                        </script>
+
+                    </div> 
+
+                </div>
+
+            </div><!-- .dns-addresses -->
+            
+            
+        </div> <!-- .col-md-6 -->
+
+    </div>
+        
+</div>
+	
+<div class="powered">
+
+
+
+
+			</div><!-- /.powered -->
+
+
+        </div><!-- /.main-content -->
+
+    </div><!-- /.row -->
+    <div class="clearfix"></div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    var csrfToken = '40b4e36e45dc6e159d38154a63cc4095ab50a112';
+</script>
+
+<div id="fullpage-overlay" class="hidden">
+    <div class="outer-wrapper">
+        <div class="inner-wrapper">
+            <img src="/assets/img/overlay-spinner.svg">
+            <br>
+            <span class="msg"></span>
+        </div>
+    </div>
+</div>
+
+<div class="modal system-modal fade" id="modalAjax" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-primary">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body panel-body">
+                Loading...
+            </div>
+            <div class="modal-footer panel-footer">
+                <div class="pull-left loader">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    Loading...
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary modal-submit">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="#" id="frmGeneratePassword" class="form-horizontal">
+    <div class="modal fade" id="modalGeneratePassword">
+        <div class="modal-dialog">
+            <div class="modal-content panel-primary">
+                <div class="modal-header panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        Generate Password
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger hidden" id="generatePwLengthError">
+                        Please enter a number between 8 and 64 for the password length
+                    </div>
+                    <div class="form-group">
+                        <label for="generatePwLength" class="col-sm-4 control-label">Password Length</label>
+                        <div class="col-sm-8">
+                            <input type="number" min="8" max="64" value="12" step="1" class="form-control input-inline input-inline-100" id="inputGeneratePasswordLength">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="generatePwOutput" class="col-sm-4 control-label">Generated Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputGeneratePasswordOutput">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <i class="fas fa-plus fa-fw"></i>
+                                Generate new password
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm copy-to-clipboard" data-clipboard-target="#inputGeneratePasswordOutput">
+                                <img src="/assets/img/clippy.svg" alt="Copy to clipboard" width="15">
+                                
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnGeneratePasswordInsert" data-clipboard-target="#inputGeneratePasswordOutput">
+                        Copy to clipboard & Insert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type='text/javascript'>window.CRISP_READY_TRIGGER = function() {$crisp.set('user:email', 'foo@foo.com');$crisp.set('user:nickname', 'Foo');$crisp.set('session:data', ['id', '123456']);$crisp.set('session:data', ['address1', '123 Main']);$crisp.set('session:data', ['city', 'Smallville']);$crisp.set('session:data', ['state', 'Alabama']);$crisp.set('session:data', ['postcode', '95030']);$crisp.set('session:data', ['country', 'US']);};</script>
+  	<script type='text/javascript'>CRISP_WEBSITE_ID = '1fed52f6-1819-1c2b-b85e-a5df31928fdb';(function(){d=document;s=d.createElement('script');s.src='https://client.crisp.im/l.js';s.async=1;d.getElementsByTagName('head')[0].appendChild(s);})();</script>
+  
+
+
+</body>
+</html>
